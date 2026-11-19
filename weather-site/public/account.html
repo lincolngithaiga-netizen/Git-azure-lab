@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="account.js"></script>
+  <title>Account - Weather App</title>
+</head>
+<body>
+  <main class="account-page">
+    <a class="back-link" href="/">Back to weather</a>
+    <h1 class="heading">Your account</h1>
+    <p id="accountMessage" class="message" role="alert" aria-live="polite" hidden></p>
+
+    <div class="account-forms">
+      <!-- Log in -->
+      <form id="loginForm" class="account-card" novalidate>
+        <h2>Log in</h2>
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" name="email" required maxlength="254" autocomplete="email" />
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" name="password" required maxlength="72" autocomplete="current-password" />
+        <button type="submit" class="unit-toggle">Log in</button>
+      </form>
+
+      <!-- Register -->
+      <form id="registerForm" class="account-card" novalidate>
+        <h2>Create an account</h2>
+        <label for="registerEmail">Email</label>
+        <input type="email" id="registerEmail" name="email" required maxlength="254" autocomplete="email" />
+        <label for="registerPassword">Password (10 to 72 characters)</label>
+        <input type="password" id="registerPassword" name="password" required minlength="10" maxlength="72" autocomplete="new-password" />
+        <button type="submit" class="unit-toggle">Create account</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

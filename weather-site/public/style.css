@@ -58,24 +58,100 @@ body {
   color: #ccc;
 }
 
-/* Converter button style (currently unused in HTML) */
-.input-group #converter {
+/* Search button sits inside the input on the right */
+.search-btn {
   position: absolute;
-  right: 45px;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
   border: none;
+  border-radius: 6px;
   background: transparent;
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-/* Search icon positioning */
-.input-group .fa-search {
-  position: absolute;
-  right: 15px;
   color: #ECDFCC;
   font-size: 1.1rem;
   cursor: pointer;
+}
+
+.search-btn:hover {
+  background: #3a4030;
+}
+
+/* Room for the button so typed text does not run underneath it */
+.input-group input {
+  padding-right: 3.2rem;
+}
+
+/* Invalid input outline (only after the user has typed something) */
+.input-group input:not(:placeholder-shown):invalid {
+  box-shadow: 0 0 0 2px #c0563f;
+}
+
+/* Inline error / info message */
+.message {
+  margin: -1rem 0 1rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  background: #3a2420;
+  border: 1px solid #c0563f;
+  color: #f2c9bf;
+  font-size: 0.95rem;
+}
+
+.message[hidden] {
+  display: none;
+}
+
+/* Celsius / Fahrenheit switch */
+.unit-toggle {
+  display: block;
+  margin: 0 auto 1.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ECDFCC;
+  border-radius: 999px;
+  background: transparent;
+  color: #ECDFCC;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.unit-toggle:hover {
+  background: #ECDFCC;
+  color: #181C14;
+}
+
+/* Current weather icon */
+.weatherIcon img {
+  width: 100px;
+  height: 100px;
+}
+
+/* Visible keyboard focus */
+input:focus-visible,
+button:focus-visible {
+  outline: 2px solid #ECDFCC;
+  outline-offset: 2px;
+}
+
+/* Screen-reader-only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .highlight div {
+    transition: none;
+  }
+  .highlight div:hover {
+    transform: none;
+  }
 }
 
 /* General spacing and text alignment for weather info */
@@ -206,4 +282,118 @@ body {
     border-right: none;
     border-bottom: 1px solid #333;
   }
+}
+
+/* ---------- Accounts and saved cities ---------- */
+.unit-toggle[hidden] {
+  display: none;
+}
+
+.auth-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.auth-bar a,
+.link-btn {
+  color: #ECDFCC;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.favourites {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.favourites li {
+  display: flex;
+  border: 1px solid #ECDFCC;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fav-city,
+.fav-remove {
+  background: transparent;
+  color: #ECDFCC;
+  border: none;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.fav-city:hover,
+.fav-remove:hover {
+  background: #3a4030;
+}
+
+/* Account page */
+.account-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #ECDFCC;
+}
+
+.account-page .message {
+  margin: 0 0 1.5rem;
+}
+
+.account-forms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.account-card {
+  background: #2a2f23;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.account-card h2 {
+  margin-bottom: 1rem;
+}
+
+.account-card label {
+  display: block;
+  margin: 0.8rem 0 0.3rem;
+  font-size: 0.95rem;
+}
+
+.account-card input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #181C14;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.account-card input:user-invalid {
+  box-shadow: 0 0 0 2px #c0563f;
+}
+
+.account-card .unit-toggle {
+  margin: 1.5rem 0 0;
 }

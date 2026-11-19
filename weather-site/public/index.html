@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <!--For display on mobile screens-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <!--Linking font awesome for icons-->
   <link
     rel="stylesheet"
@@ -28,20 +28,50 @@
 
     <!--Section for user input-->
     <div class="weather-input">
-      <div class="input-group">
 
-        <!--Text box for user to enter city-->
-        <input type="text" id="userLocation" placeholder="Search City ..." />
-        <!--Search icon that triggers findUserLocation() function-->
-        <i class="fa fa-search" onclick="findUserLocation()"></i>
-      </div>
+      <!--Shows "Log in" link, or the signed-in email with a log out button-->
+      <div id="authBar" class="auth-bar"></div>
+
+      <!--Search form: pressing Enter or clicking the button submits it.
+          Browser-side validation: required, length limit, allowed characters.
+          The server repeats these checks because client checks can be bypassed.-->
+      <form id="searchForm" class="input-group" novalidate>
+        <label for="userLocation" class="sr-only">City name</label>
+        <input
+          type="text"
+          id="userLocation"
+          name="city"
+          placeholder="Search city ..."
+          required
+          minlength="1"
+          maxlength="60"
+          pattern="[\p{L}\s.'\-]+"
+          title="Letters, spaces, apostrophes, dots and hyphens only"
+          autocomplete="off"
+        />
+        <button type="submit" class="search-btn" aria-label="Search weather">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
+
+      <!--Inline message area, replaces alert() popups-->
+      <p id="message" class="message" role="alert" aria-live="polite" hidden></p>
+
+      <!--Unit switch: Celsius / Fahrenheit-->
+      <button type="button" id="converter" class="unit-toggle" aria-label="Switch temperature unit">
+        Switch to °F
+      </button>
+
+      <!--Saved cities (visible when logged in)-->
+      <button type="button" id="saveCity" class="unit-toggle" hidden>Save this city</button>
+      <ul id="favourites" class="favourites" aria-label="Saved cities"></ul>
 
       <!--Area to display current weather details-->
       <div class="weatherIcon"></div>
       <h2 class="temperature"></h2>
       <div class="feelslike"></div>
       <div class="description"></div>
-      
+
       <div class="date"></div>
       <div class="city"></div>
     </div>
@@ -62,17 +92,17 @@
           Wind Speed <i class="fa-solid fa-wind"></i>
           <h1 id="windValue"></h1>
         </div>
-        <div class="clouds">
 
-          <!--Cloud cover info-->
+        <!--Cloud cover info-->
+        <div class="clouds">
           Clouds <i class="fa-solid fa-cloud"></i>
           <h1 id="cloudsValue"></h1>
         </div>
 
-        <!--UV index info-->
-        <div class="uv-index">
-          UV Index <i class="fa-solid fa-bacon"></i>
-          <h1 id="uvIndex"></h1>
+        <!--Visibility info (replaces UV index, which the free weather endpoint does not return)-->
+        <div class="visibility">
+          Visibility <i class="fa-solid fa-eye"></i>
+          <h1 id="visibilityValue"></h1>
         </div>
 
         <!--Atmospheric pressure info-->
